@@ -29,13 +29,18 @@ app.use('/api/config', configRouter)
 app.get('/health', (_, res) => res.json({ ok: true }))
 
 // Serve frontend static files
-const frontendDist = join(__dirname, '../frontend/dist')
-if (existsSync(frontendDist)) {
+// Docker: backend/ is copied to /app/ → dist at /app/frontend/dist
+// Local dev: running from backend/ dir → dist at ../frontend/dist
+const frontendDist = [
+  join(__dirname, 'frontend/dist'),
+  join(__dirname, '../frontend/dist'),
+].find(existsSync)
+
+if (frontendDist) {
   app.use(express.static(frontendDist))
-  // SPA fallback
-  app.get('*', (req, res) => {
-    res.sendFile(join(frontendDist, 'index.html'))
-  })
+  app.get('*', (req, res) => res.sendFile(join(frontendDist, 'index.html')))
+} else {
+  console.warn('[Server] Frontend dist not found — run: cd frontend && npm run build')
 }
 
 const server = createServer(app)
