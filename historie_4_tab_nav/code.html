@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html lang="cs"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "primary-fixed": "#d8e2ff",
+                    "on-secondary-container": "#007328",
+                    "on-secondary-fixed-variant": "#00531a",
+                    "error": "#ba1a1a",
+                    "background": "#f7f9fb",
+                    "surface-container-highest": "#e0e3e5",
+                    "primary-container": "#0070eb",
+                    "surface-container": "#eceef0",
+                    "inverse-primary": "#adc6ff",
+                    "inverse-on-surface": "#eff1f3",
+                    "secondary-fixed-dim": "#47e266",
+                    "tertiary-fixed": "#efdbff",
+                    "tertiary-container": "#8766aa",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#2d3133",
+                    "surface-container-high": "#e6e8ea",
+                    "on-primary-fixed": "#001a41",
+                    "surface-dim": "#d8dadc",
+                    "outline": "#717786",
+                    "on-tertiary-fixed": "#29074a",
+                    "tertiary": "#6d4e8f",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#6cff82",
+                    "on-tertiary-container": "#fffbff",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#005bc1",
+                    "secondary-container": "#64fd7d",
+                    "on-tertiary-fixed-variant": "#573878",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed": "#002106",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#fefcff",
+                    "surface-container-low": "#f2f4f6",
+                    "surface-variant": "#e0e3e5",
+                    "on-surface-variant": "#414755",
+                    "tertiary-fixed-dim": "#dbb8ff",
+                    "secondary": "#006e26",
+                    "primary": "#0058bc",
+                    "on-background": "#191c1e",
+                    "surface": "#f7f9fb",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f7f9fb",
+                    "outline-variant": "#c1c6d7",
+                    "on-primary": "#ffffff",
+                    "on-primary-fixed-variant": "#004493"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(32px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body text-on-surface selection:bg-primary-fixed">
+<!-- Background Orbs -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none -z-10">
+<div class="absolute top-[-10%] left-[-10%] w-[70%] h-[50%] rounded-full bg-blue-200/40 blur-[120px]"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[40%] rounded-full bg-green-200/30 blur-[100px]"></div>
+<div class="absolute top-[20%] right-[-5%] w-[40%] h-[30%] rounded-full bg-purple-200/20 blur-[80px]"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/55 dark:bg-slate-900/55 backdrop-blur-xl shadow-sm dark:shadow-none flex items-center justify-between px-6 h-16">
+<div class="flex items-center gap-3 scale-95 duration-200 hover:opacity-80 transition-opacity">
+<span class="material-symbols-outlined text-blue-600 dark:text-blue-400">restaurant_menu</span>
+<span class="text-xl font-black bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent font-['Plus_Jakarta_Sans'] font-bold tracking-tight">Co vaříme?</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-outline">account_circle</span>
+</div>
+</header>
+<main class="pt-24 pb-32 px-6 max-w-2xl mx-auto">
+<!-- Hero Header -->
+<div class="mb-10">
+<h1 class="text-[1.75rem] font-medium font-headline tracking-tight text-on-surface">Historie vaření</h1>
+<p class="text-sm text-on-surface-variant/70 mt-1">Co jste vařili</p>
+</div>
+<!-- History List -->
+<div class="space-y-4">
+<!-- Card 1 -->
+<div class="glass-effect p-4 rounded-lg flex items-center justify-between group active:scale-[0.98] transition-transform duration-150">
+<div class="flex items-center gap-4">
+<img alt="Recipe" class="w-16 h-16 rounded-lg object-cover" data-alt="close-up of a colorful buddha bowl with fresh vegetables, quinoa, and avocado with soft morning lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxDWJ3XNsXzQfQ9blnetizBEv_t_yGQi47rWfoi8uSl7nxHWfTww5i3QoGEoVYj9OaoIkGRZ1iuCYwWJvRfvyP8Lp6OtaiJqKXvr5jdSYKYmrxXDcBUezKNO7jFXpdMOF36N7Rjzzxt6W_1_9v3nWvw7FEJ10N_AJ4-Ds3Lr9a7Z183lyM8OvV9dh5LWTe_QWXYcLNKllYhOmznxsoVvj8-v2HyXFI1ek8bczD7pkD8-mauJ5xqJaema7XQxDFA8DoRkjmLBJX3PY"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface group-hover:text-primary transition-colors">Buddha bowl s quinoou</span>
+<span class="text-xs text-on-surface-variant">dnes</span>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-blue-700">J</div>
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-green-700">Z</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-effect p-4 rounded-lg flex items-center justify-between group active:scale-[0.98] transition-transform duration-150">
+<div class="flex items-center gap-4">
+<img alt="Recipe" class="w-16 h-16 rounded-lg object-cover" data-alt="rustic wooden table with a plate of fresh pasta carbonara, parmesan cheese, and black pepper with dramatic side light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUHqK7tP-bGHumvuPRnXw59OD69il_sC9h-4e0BUXTKOfhlGXcNX16svmJh1ywAngwvkA1bk9nqdTzKm1XomAol3kfmNSoIfCauh5VYuyADRyHjNc5l5aHn2bgRoaSFsrCVRe-k6BykCLoRUxwEVC7srNRsmVKBld1v-mSTdkEsm12_jrdJ085sp7KnEEGV6u9wH_WJEomET63fbhEo5LhgcEWSV1reCkAS9G_1vqVLKCiuy8baeY7maTiZ7ircmBzcKMRbl-Y_Jc"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface group-hover:text-primary transition-colors">Pravé Carbonara</span>
+<span class="text-xs text-on-surface-variant">včera</span>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-purple-700">N</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-effect p-4 rounded-lg flex items-center justify-between group active:scale-[0.98] transition-transform duration-150">
+<div class="flex items-center gap-4">
+<img alt="Recipe" class="w-16 h-16 rounded-lg object-cover" data-alt="vibrant mediterranean salad bowl with hummus, olives, and fresh pita bread in bright outdoor daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKnju8qkLBExxdfTJzZe2x84D5Dh0utJpk16z3DM0_pgBKukJux3xIyiewu4iifBDJkaSj1zzBg77VWGsLA2KkwGJagRIg6QEw7jHZlCKlensrPj009RlVSjQ4VuTO8Xs3W9vaa7R00uGno7F1auXfitrqpifpbrAHwWERDSN_5EV_XZXY3MP7DsVnM7J-2SLoB0gSZuiIMSWXVailmq3xVqFRvuzr6BRHv0i98KNavCBZgaTNTH6RX5zcyLPeBEXABFaQqlMAh-A"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface group-hover:text-primary transition-colors">Středomořský salát</span>
+<span class="text-xs text-on-surface-variant">před 3 dny</span>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-blue-700">J</div>
+<div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-purple-700">N</div>
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-green-700">Z</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="glass-effect p-4 rounded-lg flex items-center justify-between group active:scale-[0.98] transition-transform duration-150">
+<div class="flex items-center gap-4">
+<img alt="Recipe" class="w-16 h-16 rounded-lg object-cover" data-alt="healthy avocado toast with poached egg and microgreens on artisan bread with soft aesthetic studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkYo_L4xgGzjhNNY94vCaUZ_dQM_J99bHCgaD5q7n7K8GXFmB6_BfXmJS85Z8akGcheuNpGLptzzqxq7XtGWTOSoLHBqKQnqjS86F5kbj_bl0NKRQqhjd4CNxzK4B_Fc4EjUuX-VuuA3heRYpcysGNCWx8TByUptbtdWIobD3Xk9fRxlUHsAgI8R27s_7ozxj3fs8KEHoAz5St-XlxWze_nFQlL7JEnAjsVOiCdlpsPAxA7RA3FfZ_2HBqngy79eIaFwUnG-57KV0"/>
+<div class="flex flex-col">
+<span class="font-semibold text-on-surface group-hover:text-primary transition-colors">Avokádový toast se zastřeným vejcem</span>
+<span class="text-xs text-on-surface-variant">před 5 dny</span>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center border-2 border-white text-[10px] font-bold text-green-700">Z</div>
+</div>
+</div>
+</div>
+<!-- Hidden Empty State -->
+<div class="hidden flex-col items-center justify-center py-20 text-center">
+<span class="material-symbols-outlined text-6xl text-outline-variant mb-4">restaurant_menu</span>
+<p class="text-on-surface-variant font-medium">Zatím žádná historie. Uvařte svůj první recept!</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[24px] bg-white/55 dark:bg-slate-900/55 backdrop-blur-3xl border-t border-white/45 dark:border-white/10 shadow-[0_-10px_40px_rgba(0,88,188,0.08)] flex justify-around items-center h-20 px-4 w-full">
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 font-plus-jakarta text-[10px] font-medium tracking-wide uppercase hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">search</span>
+<span>Hledej</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 font-plus-jakarta text-[10px] font-medium tracking-wide uppercase hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span>Oblíbené</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 font-plus-jakarta text-[10px] font-medium tracking-wide uppercase hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span>Nákupní seznam</span>
+</a>
+<a class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 font-bold font-plus-jakarta text-[10px] tracking-wide uppercase hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span>Historie</span>
+</a>
+</nav>
+</body></html>

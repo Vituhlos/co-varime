@@ -1,0 +1,278 @@
+<html class="light" lang="cs"><head></head><body class="font-body text-on-surface selection:bg-primary-fixed min-h-screen relative pb-32">```html
+
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary-container": "#fefcff",
+                    "tertiary-fixed": "#efdbff",
+                    "secondary-fixed-dim": "#47e266",
+                    "primary-container": "#0070eb",
+                    "background": "#f7f9fb",
+                    "surface": "#f7f9fb",
+                    "outline": "#717786",
+                    "on-error-container": "#93000a",
+                    "secondary-fixed": "#6cff82",
+                    "secondary": "#006e26",
+                    "inverse-surface": "#2d3133",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-fixed-variant": "#004493",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary-container": "#8766aa",
+                    "secondary-container": "#64fd7d",
+                    "primary-fixed-dim": "#adc6ff",
+                    "on-secondary-fixed": "#002106",
+                    "surface-container-high": "#e6e8ea",
+                    "on-background": "#191c1e",
+                    "on-surface": "#191c1e",
+                    "outline-variant": "#c1c6d7",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#d8dadc",
+                    "tertiary-fixed-dim": "#dbb8ff",
+                    "primary": "#0058bc",
+                    "primary-fixed": "#d8e2ff",
+                    "on-surface-variant": "#414755",
+                    "surface-container-low": "#f2f4f6",
+                    "inverse-primary": "#adc6ff",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f7f9fb",
+                    "on-secondary-container": "#007328",
+                    "on-tertiary-fixed-variant": "#573878",
+                    "surface-container": "#eceef0",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed": "#001a41",
+                    "on-tertiary-fixed": "#29074a",
+                    "tertiary": "#6d4e8f",
+                    "surface-tint": "#005bc1",
+                    "on-secondary-fixed-variant": "#00531a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(32px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #32ADE6, #30D158);
+        }
+        .text-brand-gradient {
+            background: linear-gradient(135deg, #32ADE6, #30D158);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        body {
+            background-color: #f8fafc;
+            overflow-x: hidden;
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+<div style="position:fixed;top:-100px;left:-100px;width:400px;height:400px;background:#7dd3fc;filter:blur(80px);opacity:0.3;border-radius:50%;z-index:-1;pointer-events:none;"></div>
+<div style="position:fixed;bottom:-150px;right:-100px;width:500px;height:500px;background:#d8b4fe;filter:blur(80px);opacity:0.3;border-radius:50%;z-index:-1;pointer-events:none;"></div>
+<!-- Top AppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/55 backdrop-blur-xl shadow-sm">
+<div class="flex items-center justify-start px-6 h-16 w-full gap-2">
+<span class="material-symbols-outlined text-blue-600 text-3xl">restaurant_menu</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-black tracking-tight text-xl bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">Co vaříme?</h1>
+</div>
+</header>
+<main class="px-6 relative z-10 space-y-8 max-w-2xl mx-auto pt-20">
+<!-- Dynamic Greeting Section -->
+<section class="mt-4 transition-opacity duration-500" id="greeting-section">
+<h2 class="font-headline text-[28px] font-extrabold tracking-tight text-on-surface mb-1" id="greeting-title">Dobrý den!</h2>
+<p class="text-sm text-on-surface-variant font-medium" id="greeting-subtitle">Co uvaříme dnes?</p>
+</section>
+<!-- Voting Section -->
+<section>
+<div class="glass-card rounded-[24px] p-5 shadow-xl shadow-blue-900/5 relative">
+<button class="absolute top-4 right-4 text-outline hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+<label class="block font-headline text-[10px] font-bold tracking-[0.15em] text-on-surface-variant uppercase mb-4">ČEKÁ NA HLASOVÁNÍ</label>
+<div class="flex items-center gap-4 mb-6">
+<div class="w-14 h-14 rounded-xl overflow-hidden shadow-sm">
+<img alt="Svíčková" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBygye_7rf9lUl8hk5Ug36hpgnsoWBU0yRyY-Ra0Fz-WzM2KyfRRa3sQ2BdgZVg-Be23IWx_Ycif9guvl4aiuIEOetITLzBWuio-cFNVqj50dGHnEQ8A0a73_VDivh5xDP7untQpaml5b7ismSXvLEJytQEeq4j_tCUbvN98uDAdkmQ9Hmtqjrg1JCn0zWglw1zvCK37suXPSEscgvHP3vl-4xntSeO_Xo6SSw8XdoqnAOaQ29s6I8fr1ejkk2N9mVHPYvdD6JVkfI"/>
+</div>
+<div class="flex-1">
+<h3 class="font-headline font-bold text-on-surface text-base">Svíčková na smetaně</h3>
+<p class="text-xs text-on-surface-variant font-medium">Navrhl: Já</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<button class="flex items-center justify-center gap-2 py-3 rounded-[18px] bg-green-500/10 border border-green-500/20 text-green-700 font-bold text-sm hover:bg-green-500/20 transition-all active:scale-95">
+<span>👍</span> Chci to
+</button>
+<button class="flex items-center justify-center gap-2 py-3 rounded-[18px] bg-red-500/10 border border-red-500/20 text-red-700 font-bold text-sm hover:bg-red-500/20 transition-all active:scale-95">
+<span>👎</span> Nechci
+</button>
+</div>
+<div class="flex gap-2">
+<div class="flex items-center gap-1 bg-white/60 px-2 py-1 rounded-full border border-white/40">
+<div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center text-[10px] font-bold text-blue-700">J</div>
+<span class="material-symbols-outlined text-[14px] text-green-500 font-bold">check_circle</span>
+</div>
+<div class="flex items-center gap-1 bg-white/60 px-2 py-1 rounded-full border border-white/40">
+<div class="w-5 h-5 rounded-full bg-purple-100 flex items-center justify-center text-[10px] font-bold text-purple-700">Z</div>
+<span class="material-symbols-outlined text-[14px] text-outline/50 font-bold">help</span>
+</div>
+<div class="flex items-center gap-1 bg-white/60 px-2 py-1 rounded-full border border-white/40">
+<div class="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center text-[10px] font-bold text-orange-700">N</div>
+<span class="material-symbols-outlined text-[14px] text-outline/50 font-bold">help</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Discovery Glass Container -->
+<div class="glass-card rounded-xl p-6 shadow-xl shadow-blue-900/5 space-y-6">
+<!-- Search -->
+<div>
+<label class="block font-label text-[10px] font-bold tracking-[0.15em] text-on-surface-variant uppercase mb-3">INGREDIENCE NEBO NÁZEV</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-lowest rounded-2xl border-none ring-1 ring-outline-variant/30 focus:ring-2 focus:ring-primary transition-all text-on-surface placeholder:text-outline/60 shadow-inner" placeholder="Kuřecí prsa, těstoviny..." type="text"/>
+</div>
+</div>
+<!-- Mood Chips -->
+<div>
+<label class="block font-label text-[10px] font-bold tracking-[0.15em] text-on-surface-variant uppercase mb-3">NEBO VYBER NÁLADU</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Maso 🥩</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-bold text-white brand-gradient shadow-md shadow-green-500/20 active:scale-95 transition-transform">Lehké 🥗</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Těstoviny 🍝</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Polévka 🍲</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Veggie 🥦</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Rychlé ⚡</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Na víkend 🎉</button>
+<button class="px-3 py-1.5 rounded-full text-xs font-semibold bg-white/40 border border-white/60 hover:bg-white/60 transition-colors">Dezert 🍰</button>
+</div>
+</div>
+<!-- CTA Button -->
+<button class="w-full py-4 brand-gradient text-white font-headline font-bold text-lg rounded-full shadow-lg shadow-blue-500/30 hover:shadow-xl hover:scale-[1.02] active:scale-95 transition-all">
+            Najít recepty
+        </button>
+</div>
+<!-- Recently Cooked Section -->
+<section>
+<div class="flex justify-between items-end mb-4">
+<label class="font-label text-[10px] font-bold tracking-[0.15em] text-on-surface-variant uppercase">NEDÁVNO VAŘENO</label>
+<button class="text-xs font-bold text-primary">Zobrazit vše</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Recipe Card 1 -->
+<div class="glass-card p-4 rounded-xl group cursor-pointer hover:shadow-lg transition-shadow">
+<div class="w-full aspect-square rounded-lg mb-3 overflow-hidden">
+<img alt="Salát" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="top view of a colorful mediterranean buddha bowl with chickpeas, avocado, and fresh greens on a light stone background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0wt1NlxCYqzlRbHR7ymTNlZc_Kj8eVRmG6Dm8suU4C4c4cq4ytIBu811AULz12iHXZtks7ViqFukdqzLAlgGr-oDQDtosG14u1edOkoOK-kudlbEq7BCwaBMSaELVKdZFnfkDhdv4ziH9vrGIq9k5lm8YJQc0NCZ6OscA12VmprlhzusweqAYjPGusbZ7fOWPDcBQF0aJefeqgyFPI1DX8QlVW3HpPlZzZgypLaoe4KEXTYx9lFwz1cqr-qJFGOgfU--HNH6WQ5I"/>
+</div>
+<div class="flex items-center gap-1.5 mb-1">
+<span class="text-sm">🥗</span>
+<h3 class="font-headline font-bold text-on-surface text-sm truncate">Lehký salát</h3>
+</div>
+<p class="text-[10px] text-on-surface-variant font-medium">před 2 dny</p>
+</div>
+<!-- Recipe Card 2 -->
+<div class="glass-card p-4 rounded-xl group cursor-pointer hover:shadow-lg transition-shadow">
+<div class="w-full aspect-square rounded-lg mb-3 overflow-hidden">
+<img alt="Boloňské" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="close up of homemade spaghetti bolognese with fresh basil and presidential shavings in a rustic white bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjgye_7rf9lUl8hk5Ug36hpgnsoWBU0yRyY-Ra0Fz-WzM2KyfRRa3sQ2BdgZVg-Be23IWx_Ycif9guvl4aiuIEOetITLzBWuio-cFNVqj50dGHnEQ8A0a73_VDivh5xDP7untQpaml5b7ismSXvLEJytQEeq4j_tCUbvN98uDAdkmQ9Hmtqjrg1JCn0zWglw1zvCK37suXPSEscgvHP3vl-4xntSeO_Xo6SSw8XdoqnAOaQ29s6I8fr1ejkk2N9mVHPYvdD6JVkfI"/>
+</div>
+<div class="flex items-center gap-1.5 mb-1">
+<span class="text-sm">🍝</span>
+<h3 class="font-headline font-bold text-on-surface text-sm truncate">Boloňské špagety</h3>
+</div>
+<p class="text-[10px] text-on-surface-variant font-medium">před 5 dny</p>
+</div>
+</div>
+</section>
+<!-- Featured / Daily Tip -->
+<section class="pb-8">
+<div class="relative rounded-xl overflow-hidden shadow-2xl h-48 group">
+<img alt="Daily Tip" class="absolute inset-0 w-full h-full object-cover" data-alt="artistic overhead shot of various fresh ingredients on a wooden table with dramatic natural lighting and long shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvf2W3DDLAVAI7hv4Ag_W1jZRSrj16z7BHGUjJrEzt_bG7bcxtHdcofvT0X3WuX2ZkG2aj3-t3p1PWDsm4ZB2UTLdzC-qswW7GtrKssxacfCKnyb5r98T1H9CLQK3noK2sUqkBcZjCgCxPG4Q0_GC_l_JKjnh9xtFhETo90KkX1oDN7eyJGBw0419VbNEqIcA-Y7gNrm-49_2rKaArtisp4Tdqazy1nBJq7dD9cY859O5vpfHtunPHksnduj1O0RLVaSsUp4oV4X0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute bottom-4 left-4 right-4">
+<span class="inline-block px-2 py-1 bg-white/20 backdrop-blur-md rounded-md text-[9px] font-black uppercase tracking-widest text-white mb-2">TIP DNE</span>
+<h4 class="text-white font-headline font-bold text-xl leading-tight">Jak připravit dokonalý hovězí steak?</h4>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[24px] bg-white/55 dark:bg-slate-900/55 backdrop-blur-3xl border-t border-white/45 dark:border-white/10 shadow-[0_-10px_40px_rgba(0,88,188,0.08)] flex justify-around items-center h-20 px-4 w-full">
+<a class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 font-bold hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase">Hledej</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase">Oblíbené</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase">Nákupní seznam</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-colors scale-98 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase">Historie</span>
+</a>
+</nav>
+<script>
+    function updateGreeting() {
+        const hour = new Date().getHours();
+        const title = document.getElementById('greeting-title');
+        const subtitle = document.getElementById('greeting-subtitle');
+        
+        let greetingText = "";
+        let subText = "";
+
+        if (hour >= 6 && hour < 11) {
+            greetingText = "Dobré ráno! ☀️";
+            subText = "Co dnes uvaříme?";
+        } else if (hour >= 11 && hour < 14) {
+            greetingText = "Čas na oběd 🍽️";
+            subText = "Co si dáme?";
+        } else if (hour >= 14 && hour < 18) {
+            greetingText = "Dobré odpoledne 👋";
+            subText = "Co vaříme k večeři?";
+        } else if (hour >= 18 && hour < 23) {
+            greetingText = "Dobrý večer 🌙";
+            subText = "Co k večeři?";
+        } else {
+            greetingText = "Pozdní noc 🌙";
+            subText = "Ještě vaříme?";
+        }
+
+        title.textContent = greetingText;
+        subtitle.textContent = subText;
+    }
+
+    // Initialize greeting on load
+    document.addEventListener('DOMContentLoaded', updateGreeting);
+</script>
+```</body></html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="cs"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#2d3133",
+                    "primary-fixed": "#d8e2ff",
+                    "on-surface-variant": "#414755",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-dim": "#d8dadc",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error": "#ffffff",
+                    "background": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed": "#002106",
+                    "surface-bright": "#f7f9fb",
+                    "primary": "#0058bc",
+                    "secondary": "#006e26",
+                    "primary-container": "#0070eb",
+                    "on-primary-fixed": "#001a41",
+                    "surface-variant": "#e0e3e5",
+                    "on-primary-fixed-variant": "#004493",
+                    "on-error-container": "#93000a",
+                    "outline": "#717786",
+                    "on-secondary-container": "#007328",
+                    "on-primary-container": "#fefcff",
+                    "primary-fixed-dim": "#adc6ff",
+                    "outline-variant": "#c1c6d7",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary-container": "#8766aa",
+                    "surface-container": "#eceef0",
+                    "surface": "#f7f9fb",
+                    "on-tertiary-container": "#fffbff",
+                    "surface-tint": "#005bc1",
+                    "on-tertiary-fixed-variant": "#573878",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f2f4f6",
+                    "on-tertiary-fixed": "#29074a",
+                    "on-secondary-fixed-variant": "#00531a",
+                    "secondary-fixed": "#6cff82",
+                    "secondary-fixed-dim": "#47e266",
+                    "tertiary": "#6d4e8f",
+                    "inverse-primary": "#adc6ff",
+                    "on-surface": "#191c1e",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#dbb8ff",
+                    "secondary-container": "#64fd7d",
+                    "on-background": "#191c1e",
+                    "tertiary-fixed": "#efdbff",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(32px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.45);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            overflow: hidden;
+            background-color: #f7f9fb;
+        }
+        .orb-blue {
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(50, 173, 230, 0.15) 0%, rgba(50, 173, 230, 0) 70%);
+            filter: blur(80px);
+        }
+        .orb-purple {
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(circle, rgba(109, 78, 143, 0.12) 0%, rgba(109, 78, 143, 0) 70%);
+            filter: blur(100px);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #32ADE6, #30D158);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface min-h-screen pb-32">
+<!-- Background Orbs -->
+<div class="bg-orbs">
+<div class="orb-blue"></div>
+<div class="orb-purple"></div>
+</div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/55 backdrop-blur-xl shadow-sm">
+<div class="flex items-center justify-start px-6 h-16 w-full gap-2">
+<span class="material-symbols-outlined text-blue-600 text-3xl">restaurant_menu</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-black tracking-tight text-xl bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">Co vaříme?</h1>
+</div>
+</header>
+<!-- Main Content -->
+<main class="px-6 max-w-2xl mx-auto pt-24">
+<!-- Header Section -->
+<section class="mb-8">
+<h1 class="text-[3.5rem] font-headline font-extrabold leading-[1.1] tracking-tight text-on-surface">Nákupní seznam</h1>
+<p class="text-on-surface-variant opacity-70 mt-2 font-medium">Z receptů co chceš vařit</p>
+</section>
+<!-- Bento Layout / Grouped Lists -->
+<div class="space-y-8">
+<!-- Recipe Group 1 -->
+<section class="glass-card rounded-lg p-6 shadow-sm overflow-hidden relative">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-sm font-bold text-on-surface-variant tracking-[0.2em] uppercase">Lososový Poké Bowl</h3>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input checked="" class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface-variant line-through font-medium transition-all">Čerstvý filet z lososa</span>
+<span class="text-sm text-outline">300g</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface font-semibold group-hover:text-primary transition-colors">Sushi rýže</span>
+<span class="text-sm text-on-surface-variant">250g</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface font-semibold group-hover:text-primary transition-colors">Zralé avokádo</span>
+<span class="text-sm text-on-surface-variant">1 ks</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Subtle Image Bleed -->
+<div class="absolute -right-12 -bottom-12 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[160px]" data-icon="set_meal">set_meal</span>
+</div>
+</section>
+<!-- Recipe Group 2 -->
+<section class="glass-card rounded-lg p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-sm font-bold text-on-surface-variant tracking-[0.2em] uppercase">Thajské zelené kari</h3>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface font-semibold group-hover:text-primary transition-colors">Kokosové mléko</span>
+<span class="text-sm text-on-surface-variant">400ml</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface font-semibold group-hover:text-primary transition-colors">Pasta ze zeleného kari</span>
+<span class="text-sm text-on-surface-variant">50g</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface font-semibold group-hover:text-primary transition-colors">Lilek thajský</span>
+<span class="text-sm text-on-surface-variant">4 ks</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Extra items / Uncategorized -->
+<section class="glass-card rounded-lg p-6 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline text-sm font-bold text-on-surface-variant tracking-[0.2em] uppercase">Ostatní drobnosti</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-center group">
+<label class="flex items-center flex-1 cursor-pointer">
+<input checked="" class="w-6 h-6 rounded-lg border-outline-variant text-primary focus:ring-primary-container transition-all" type="checkbox"/>
+<div class="ml-4 flex-1">
+<span class="block text-on-surface-variant line-through font-medium">Minerální voda</span>
+<span class="text-sm text-outline">2x 1.5l</span>
+</div>
+</label>
+<button class="p-2 text-outline opacity-40 hover:opacity-100 hover:text-error transition-all">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<!-- Action Button -->
+<div class="mt-12 flex justify-center">
+<button class="glass-card flex items-center gap-2 px-8 py-4 rounded-full text-error font-bold hover:bg-white/40 transition-all active:scale-95 shadow-lg">
+<span class="material-symbols-outlined" data-icon="delete_sweep">delete_sweep</span>
+                Vymazat nakoupené
+            </button>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-[100px] right-6 w-14 h-14 rounded-full brand-gradient flex items-center justify-center text-white shadow-[0_8px_24px_rgba(48,209,88,0.3)] z-[60] active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-3xl font-bold">add</span>
+</button>
+<!-- Bottom Sheet (Active/Open) -->
+<div class="fixed inset-0 z-[70] flex flex-col justify-end">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-on-surface/20 backdrop-blur-sm"></div>
+<!-- Sheet -->
+<div class="relative w-full max-w-2xl mx-auto bg-white/90 backdrop-blur-2xl rounded-t-[32px] shadow-[0_-8px_40px_rgba(0,0,0,0.1)] p-6 pb-8 animate-in slide-in-from-bottom duration-300 max-h-[90vh] overflow-y-auto hide-scrollbar">
+<!-- Handle -->
+<div class="absolute top-3 left-1/2 -translate-x-1/2 w-10 h-1 rounded-full bg-outline-variant/50"></div>
+<div class="mt-4"><div class="flex items-center gap-4 mb-8 p-4 bg-primary/5 rounded-full">
+<div class="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center text-2xl">🥛</div>
+<div class="flex-1">
+<h2 class="text-xl font-headline font-bold text-on-surface leading-tight">Mléko</h2>
+<p class="text-sm text-on-surface-variant font-medium">Mléčné výrobky</p>
+</div>
+<button class="p-2 text-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<!-- Search Input -->
+<!-- Suggestions List -->
+<!-- Quantity Selector -->
+<div class="mb-6">
+<h3 class="text-[10px] font-bold text-outline uppercase tracking-wider mb-3">Množství</h3>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-xl">remove</span>
+</button>
+<input class="w-16 h-10 bg-transparent text-center font-bold text-xl outline-none focus:ring-0 border-none" type="number" value="1"/>
+<button class="w-10 h-10 rounded-full glass-card flex items-center justify-center text-primary active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-xl">add</span>
+</button>
+</div>
+</div>
+<!-- Unit Selector -->
+<div class="mb-6">
+<h3 class="text-[10px] font-bold text-outline uppercase tracking-wider mb-3">Jednotka</h3>
+<div class="flex gap-2 overflow-x-auto hide-scrollbar -mx-2 px-2">
+<button class="px-5 py-2 rounded-full brand-gradient text-white text-sm font-bold shadow-sm whitespace-nowrap">ks</button>
+<button class="px-5 py-2 rounded-full bg-white/50 border border-white/40 text-on-surface-variant text-sm font-semibold hover:bg-white transition-colors whitespace-nowrap">g</button>
+<button class="px-5 py-2 rounded-full bg-white/50 border border-white/40 text-on-surface-variant text-sm font-semibold hover:bg-white transition-colors whitespace-nowrap">kg</button>
+<button class="px-5 py-2 rounded-full bg-white/50 border border-white/40 text-on-surface-variant text-sm font-semibold hover:bg-white transition-colors whitespace-nowrap">ml</button>
+<button class="px-5 py-2 rounded-full bg-white/50 border border-white/40 text-on-surface-variant text-sm font-semibold hover:bg-white transition-colors whitespace-nowrap">l</button>
+<button class="px-5 py-2 rounded-full bg-white/50 border border-white/40 text-on-surface-variant text-sm font-semibold hover:bg-white transition-colors whitespace-nowrap">balení</button>
+</div>
+</div>
+<!-- Note Field -->
+<div class="mb-8">
+<input class="w-full py-3 bg-transparent border-b border-outline-variant/30 focus:border-primary/50 outline-none text-sm font-medium placeholder:text-outline/50 transition-colors" placeholder="Poznámka..." type="text"/>
+</div>
+<!-- CTA Button -->
+<button class="w-full h-16 rounded-2xl brand-gradient text-white font-bold text-lg shadow-lg shadow-green-500/20 active:scale-[0.98] transition-all">Přidat do seznamu</button>
+</div>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[24px] bg-white/55 dark:bg-slate-900/55 backdrop-blur-3xl border-t border-white/45 dark:border-white/10 shadow-[0_-10px_40px_rgba(0,88,188,0.08)] flex justify-around items-center h-20 px-4 w-full">
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-colors scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase mt-1">Hledej</span>
+</a>
+<!-- Favorites -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-colors scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase mt-1">Oblíbené</span>
+</a>
+<!-- Shopping List (Active) -->
+<a class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 font-bold hover:bg-white/20 transition-colors scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="shopping_cart" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase mt-1">Nákupní seznam</span>
+</a>
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:bg-white/20 transition-colors scale-98" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-plus-jakarta text-[10px] font-medium tracking-wide uppercase mt-1">Historie</span>
+</a>
+</nav>
+<!-- Contextual Decorative Image -->
+<div class="fixed top-1/2 -right-24 opacity-5 pointer-events-none -rotate-12 hidden lg:block">
+<img alt="" class="w-96 rounded-xl" data-alt="top down view of organized grocery bag with fresh vegetables and herbs on a wooden kitchen table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd05P-389rJmi2dNCMWa0u8hv8IsvdW-KB3zw4DPKN4Xrh9RvF2DIAZrY0OVJWX18Ng8oJkI_GGaO3vSxKFC0Dc-vz_XVPsnkKMfo-odnKql1Um_OkV7Swn2y0cZei5uMOW9jXnZW1mMHEL5JTEm5CLuXK44NKMy957SwbPHpDYmYt0jArvlns0qQRIpmOLg9uS4pJZCQsJkKoz-dJWVkpz8963AKKEviGQZ9RPMNKC37F8hWNwZLbKqij4gN7HCS8gaie2ivWEAk"/>
+</div>
+</body></html>

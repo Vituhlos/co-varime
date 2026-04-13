@@ -1,0 +1,22 @@
+{
+  "name": "Co vaříme?",
+  "short_name": "Co vaříme?",
+  "description": "Rodinná appka pro hledání receptů a plánování vaření",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f9fb",
+  "theme_color": "#0058bc",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
