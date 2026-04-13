@@ -1,0 +1,8 @@
+node_modules/
+frontend/dist/
+.env
+data/
+*.db
+co-varime/
+lumina_culinary/
+co-varime-claude-code.zip

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>co-varime</Name>
+  <Repository>ghcr.io/Vituhlos/co-varime:latest</Repository>
+  <Registry>https://ghcr.io</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support/>
+  <Project>https://github.com/Vituhlos/co-varime</Project>
+  <Overview>
+    Rodinná appka pro hledání receptů, hlasování a nákupní seznam.
+    Integruje Mealie (recepty + seznam), Claude AI (hledání) a Open Food Facts (autocomplete).
+    Vše nastavitelné přímo z UI — žádné env proměnné potřeba.
+    Port: 3335. Data se ukládají do /mnt/user/appdata/co-varime.
+  </Overview>
+  <Category>Tools: MediaApp:Other</Category>
+  <WebUI>http://[IP]:[PORT:3335]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Vituhlos/co-varime/main/unraid-template.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Vituhlos/co-varime/main/frontend/public/icons/icon-192.png</Icon>
+  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Description>
+    Co vaříme? je rodinná webová appka pro domácí použití.
+    Funkce: AI hledání českých receptů (Claude API), hlasování o večeři pro celou domácnost,
+    nákupní seznam se sync v reálném čase, integrace s Mealie, historie vaření.
+    Nastavení (Mealie URL, API klíče) se provádí přímo v UI appky — bez nutnosti měnit Docker proměnné.
+  </Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>3335</HostPort>
+        <ContainerPort>3000</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/appdata/co-varime</HostDir>
+      <ContainerDir>/app/data</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Environment/>
+  <Labels/>
+  <Config
+    Name="WebUI Port"
+    Target="3000"
+    Default="3335"
+    Mode="tcp"
+    Description="Port pro přístup k webové appce. Výchozí: 3335."
+    Type="Port"
+    Display="always"
+    Required="true"
+    Mask="false">3335</Config>
+  <Config
+    Name="Data"
+    Target="/app/data"
+    Default="/mnt/user/appdata/co-varime"
+    Mode="rw"
+    Description="Složka pro uložení nastavení (config.json) a databáze hlasování (votes.db)."
+    Type="Path"
+    Display="always"
+    Required="true"
+    Mask="false">/mnt/user/appdata/co-varime</Config>
+</Container>
