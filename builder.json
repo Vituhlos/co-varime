@@ -5,7 +5,7 @@
     "owner": "Vituhlos",
     "repo": "co-varime"
   },
-  "ios": {},
+  "ios": { "path": "mobile/ios" },
   "flutter": {
     "watch": {}
   },
