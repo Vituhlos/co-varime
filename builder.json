@@ -1,0 +1,14 @@
+{
+  "project": "CoVarime",
+  "platform": "ios",
+  "github": {
+    "owner": "Vituhlos",
+    "repo": "co-varime"
+  },
+  "ios": {},
+  "flutter": {
+    "watch": {}
+  },
+  "reactNative": {},
+  "mobai": {}
+}
