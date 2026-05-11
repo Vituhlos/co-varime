@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Layout from '../components/Layout'
 import VotingCard from '../components/VotingCard'
 import RecipeCard from '../components/RecipeCard'
+import useWebSocket from '../hooks/useWebSocket'
 
 const MOODS = [
   { label: 'Maso', emoji: '🥩' },
@@ -37,17 +38,29 @@ export default function Home() {
   const [recentRecipes, setRecentRecipes] = useState([])
   const greeting = getGreeting()
 
-  useEffect(() => {
+  const refreshProposal = () => {
     fetch('/api/vote/active')
       .then(r => r.json())
-      .then(data => data?.id && setProposal(data))
+      .then(data => data?.id ? setProposal(data) : setProposal(null))
       .catch(() => {})
+  }
+
+  useEffect(() => {
+    refreshProposal()
 
     fetch('/api/mealie/history')
       .then(r => r.json())
-      .then(data => setRecentRecipes((data || []).slice(0, 2)))
+      .then(data => setRecentRecipes(
+        (data || []).slice(0, 2).map(r => ({ ...r, lastCooked: r.cookedAt || r.date }))
+      ))
       .catch(() => {})
   }, [])
+
+  useWebSocket((event) => {
+    if (['vote_updated', 'proposal_new', 'proposal_closed'].includes(event.type)) {
+      refreshProposal()
+    }
+  })
 
   const toggleMood = (mood) => {
     setSelectedMoods(prev =>
@@ -77,7 +90,7 @@ export default function Home() {
         {proposal && showVoting && (
           <VotingCard
             proposal={proposal}
-            onVote={() => {}}
+            onVote={refreshProposal}
             onClose={() => setShowVoting(false)}
           />
         )}

@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-5-20251022',
+        model: 'claude-sonnet-4-6',
         max_tokens: 4000,
         tools: [{ type: 'web_search_20250305', name: 'web_search' }],
         system: `Jsi asistent pro hledání receptů. Hledáš české recepty na internetu.

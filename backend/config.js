@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs'
 import { join } from 'path'
 
-const DATA_DIR = process.env.DATA_DIR || '/app/data'
+const DATA_DIR = process.env.DATA_DIR || (process.platform === 'win32' ? './data' : '/app/data')
 const CONFIG_FILE = join(DATA_DIR, 'config.json')
 
 const DEFAULTS = {

@@ -27,7 +27,9 @@ export default function Detail() {
   const [checked, setChecked] = useState({})
   const [saving, setSaving] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [mealieSlug, setMealieSlug] = useState(null)
   const [isFavorite, setIsFavorite] = useState(false)
+  const [togglingFav, setTogglingFav] = useState(false)
 
   const scale = selectedServings / baseServings
 
@@ -45,16 +47,64 @@ export default function Detail() {
     if (!recipe?.url) return
     setSaving(true)
     try {
-      await fetch('/api/mealie/recipes', {
+      const res = await fetch('/api/mealie/recipes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: recipe.url }),
       })
+      const data = await res.json()
+      if (data?.slug) setMealieSlug(data.slug)
       setSaved(true)
     } catch (e) {
       console.error(e)
     } finally {
       setSaving(false)
+    }
+  }
+
+  const handleToggleFavorite = async () => {
+    if (togglingFav) return
+    const next = !isFavorite
+    setIsFavorite(next)
+    if (!mealieSlug && recipe?.url) {
+      setTogglingFav(true)
+      try {
+        const res = await fetch('/api/mealie/recipes', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url: recipe.url }),
+        })
+        const data = await res.json()
+        const slug = data?.slug
+        if (slug) {
+          setMealieSlug(slug)
+          setSaved(true)
+          await fetch(`/api/mealie/recipes/${slug}/favorite`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ favorite: next }),
+          })
+        }
+      } catch (e) {
+        console.error(e)
+        setIsFavorite(!next)
+      } finally {
+        setTogglingFav(false)
+      }
+    } else if (mealieSlug) {
+      setTogglingFav(true)
+      try {
+        await fetch(`/api/mealie/recipes/${mealieSlug}/favorite`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ favorite: next }),
+        })
+      } catch (e) {
+        console.error(e)
+        setIsFavorite(!next)
+      } finally {
+        setTogglingFav(false)
+      }
     }
   }
 
@@ -64,7 +114,7 @@ export default function Detail() {
       await fetch('/api/vote/propose', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ recipe }),
+        body: JSON.stringify({ recipe, proposedBy: localStorage.getItem('activeMember') || 'J' }),
       })
     } catch {}
   }
@@ -97,7 +147,7 @@ export default function Detail() {
           </button>
         </div>
         <button
-          onClick={() => setIsFavorite(!isFavorite)}
+          onClick={handleToggleFavorite}
           className="absolute top-4 right-4 z-10 glass-card p-2 rounded-full"
         >
           <Icon name="favorite" filled={isFavorite} className={isFavorite ? 'text-red-500' : 'text-outline'} />

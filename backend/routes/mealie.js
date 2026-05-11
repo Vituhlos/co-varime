@@ -5,7 +5,10 @@ const router = Router()
 
 function getMealieConfig() {
   const cfg = getConfig()
-  return { url: cfg.mealieUrl, key: cfg.mealieApiKey }
+  return {
+    url: (cfg.mealieUrl || '').replace(/\/+$/, ''),
+    key: cfg.mealieApiKey || '',
+  }
 }
 
 function mealieHeaders() {
@@ -22,8 +25,19 @@ async function mealieRequest(path, options = {}) {
     ...options,
     headers: { ...mealieHeaders(), ...options.headers },
   })
-  if (!res.ok) throw new Error(`Mealie error ${res.status}: ${path}`)
-  return res.json()
+  if (!res.ok) {
+    let detail = ''
+    try {
+      detail = await res.text()
+    } catch {}
+    throw new Error(`Mealie error ${res.status}: ${path}${detail ? ` - ${detail}` : ''}`)
+  }
+
+  if (res.status === 204) return null
+
+  const contentType = res.headers.get('content-type') || ''
+  if (contentType.includes('application/json')) return res.json()
+  return res.text()
 }
 
 // GET /api/mealie/recipes
@@ -42,7 +56,7 @@ router.post('/recipes', async (req, res) => {
   const { url } = req.body
   if (!url) return res.status(400).json({ error: 'URL je povinné' })
   try {
-    const data = await mealieRequest('/recipes/create-url', {
+    const data = await mealieRequest('/recipes/create/url', {
       method: 'POST',
       body: JSON.stringify({ url }),
     })
@@ -60,10 +74,10 @@ router.get('/history', async (req, res) => {
     const items = (data.items || []).map(plan => ({
       id: plan.id,
       name: plan.recipe?.name || plan.title,
-      image: plan.recipe?.image,
+      image: plan.recipe?.image ? `${getMealieConfig().url}/api/media/recipes/${plan.recipe.id}/images/min-original.webp` : null,
       date: plan.date,
       cookedAt: plan.date,
-      cookedBy: ['J'],
+      cookedBy: plan.recipe?.extras?.cookedBy ? JSON.parse(plan.recipe.extras.cookedBy) : ['J'],
     }))
     res.json(items.reverse())
   } catch (err) {
@@ -79,7 +93,11 @@ router.get('/shopping', async (req, res) => {
     const lists = data.items || []
     if (lists.length === 0) return res.json([])
     const list = await mealieRequest(`/groups/shopping/lists/${lists[0].id}`)
-    res.json(list.listItems || [])
+    const items = (list.listItems || []).map(item => ({
+      ...item,
+      group: item.recipeReferences?.[0]?.name || item.label?.name || 'Ostatní',
+    }))
+    res.json(items)
   } catch (err) {
     console.error('[Mealie] shopping error:', err.message)
     res.json([])
@@ -128,16 +146,43 @@ router.delete('/shopping/:id', async (req, res) => {
   }
 })
 
+// PATCH /api/mealie/recipes/:slug/favorite
+router.patch('/recipes/:slug/favorite', async (req, res) => {
+  const { slug } = req.params
+  const { favorite } = req.body
+  try {
+    const recipe = await mealieRequest(`/recipes/${slug}`)
+    await mealieRequest(`/recipes/${slug}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ settings: { ...recipe.settings, isFavorite: favorite } }),
+    })
+    res.json({ ok: true })
+  } catch (err) {
+    console.error('[Mealie] favorite error:', err.message)
+    res.status(500).json({ error: err.message })
+  }
+})
+
 // POST /api/mealie/test
 router.post('/test', async (req, res) => {
-  const { url, apiKey } = req.body
+  const cfg = getConfig()
+  const url = (req.body?.url || cfg.mealieUrl || '').replace(/\/+$/, '')
+  const apiKey = req.body?.apiKey || cfg.mealieApiKey
+
+  if (!url) return res.status(400).json({ ok: false, error: 'Chybí Mealie URL' })
+  if (!apiKey) return res.status(400).json({ ok: false, error: 'Chybí Mealie API klíč' })
+
   try {
     const r = await fetch(`${url}/api/app/about`, {
       headers: { 'Authorization': `Bearer ${apiKey}` },
     })
-    res.json({ ok: r.ok, status: r.status })
-  } catch {
-    res.status(503).json({ ok: false })
+    let detail = ''
+    try {
+      detail = await r.text()
+    } catch {}
+    res.status(r.ok ? 200 : 502).json({ ok: r.ok, status: r.status, error: r.ok ? null : detail || 'Mealie odmítlo požadavek' })
+  } catch (err) {
+    res.status(503).json({ ok: false, error: err.message || 'Mealie není dostupné' })
   }
 })
 

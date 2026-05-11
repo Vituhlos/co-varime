@@ -7,7 +7,6 @@ export default function useWebSocket(onMessage) {
 
   const connect = useCallback(() => {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
-    const host = window.location.hostname
     // Use same host+port as the app (nginx proxies /ws to backend)
     const ws = new WebSocket(`${protocol}//${window.location.host}/ws`)
 

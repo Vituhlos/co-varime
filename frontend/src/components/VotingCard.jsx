@@ -26,7 +26,7 @@ export default function VotingCard({ proposal, onVote, onClose }) {
       await fetch(`/api/vote/${proposal.id}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ vote, member: 'J' }),
+        body: JSON.stringify({ vote, member: localStorage.getItem('activeMember') || 'J' }),
       })
       onVote?.()
     } catch (e) {

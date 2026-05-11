@@ -31,6 +31,10 @@ export default function Nastaveni() {
   const [defaultServings, setDefaultServings] = useState(4)
   const [members, setMembers] = useState([])
   const [darkMode, setDarkMode] = useState(false)
+  const [activeMember, setActiveMember] = useState(() => localStorage.getItem('activeMember') || 'J')
+  const [newMemberKey, setNewMemberKey] = useState('')
+  const [newMemberName, setNewMemberName] = useState('')
+  const [showAddMember, setShowAddMember] = useState(false)
 
   useEffect(() => {
     fetch('/api/config')
@@ -79,7 +83,8 @@ export default function Nastaveni() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: mealieUrl, apiKey: keyToTest }),
       })
-      setTestStatus(res.ok ? 'ok' : 'error')
+      const data = await res.json().catch(() => ({}))
+      setTestStatus(data.ok ? 'ok' : 'error')
     } catch {
       setTestStatus('error')
     }
@@ -92,10 +97,20 @@ export default function Nastaveni() {
     document.documentElement.classList.toggle('dark', next)
   }
 
+  const handleSetActiveMember = (key) => {
+    setActiveMember(key)
+    localStorage.setItem('activeMember', key)
+  }
+
   const addMember = () => {
-    const key = prompt('Iniciála (jedno písmeno):')?.trim().toUpperCase().charAt(0)
-    const name = key ? prompt('Jméno:')?.trim() : null
-    if (key && name) setMembers(prev => [...prev, { key, name, role: '' }])
+    const key = newMemberKey.trim().toUpperCase().charAt(0)
+    const name = newMemberName.trim()
+    if (key && name) {
+      setMembers(prev => [...prev, { key, name, role: '' }])
+      setNewMemberKey('')
+      setNewMemberName('')
+      setShowAddMember(false)
+    }
   }
 
   if (loading) return (
@@ -161,12 +176,60 @@ export default function Nastaveni() {
                 </div>
               )
             })}
-            <button
-              onClick={addMember}
-              className="w-full glass-card border-dashed border-2 border-outline-variant/30 p-4 rounded-lg flex items-center justify-center gap-2 font-semibold text-primary hover:bg-white/80 transition-all active:scale-[0.98]"
-            >
-              <Icon name="add" /> Přidat člena
-            </button>
+            {showAddMember ? (
+              <div className="glass-card p-4 rounded-lg space-y-3">
+                <div className="flex gap-3">
+                  <input
+                    value={newMemberKey}
+                    onChange={e => setNewMemberKey(e.target.value.toUpperCase().charAt(0))}
+                    maxLength={1}
+                    placeholder="J"
+                    className="w-16 bg-surface-container-lowest rounded-lg p-3 text-center font-bold text-lg outline-none focus:ring-2 focus:ring-primary/20"
+                  />
+                  <input
+                    value={newMemberName}
+                    onChange={e => setNewMemberName(e.target.value)}
+                    placeholder="Jméno..."
+                    className="flex-1 bg-surface-container-lowest rounded-lg p-3 outline-none focus:ring-2 focus:ring-primary/20"
+                  />
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={addMember} className="flex-1 py-2 brand-gradient text-white rounded-lg font-bold text-sm">Přidat</button>
+                  <button onClick={() => setShowAddMember(false)} className="flex-1 py-2 bg-surface-container rounded-lg font-bold text-sm text-on-surface-variant">Zrušit</button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowAddMember(true)}
+                className="w-full glass-card border-dashed border-2 border-outline-variant/30 p-4 rounded-lg flex items-center justify-center gap-2 font-semibold text-primary hover:bg-white/80 transition-all active:scale-[0.98]"
+              >
+                <Icon name="add" /> Přidat člena
+              </button>
+            )}
+          </div>
+        </section>
+
+        {/* Aktivní uživatel */}
+        <section>
+          <SectionLabel>Kdo vaří teď?</SectionLabel>
+          <div className="flex gap-3">
+            {members.map(m => {
+              const colors = MEMBER_COLORS[m.key] || { bg: 'bg-surface-container', text: 'text-on-surface' }
+              const isActive = activeMember === m.key
+              return (
+                <button
+                  key={m.key}
+                  onClick={() => handleSetActiveMember(m.key)}
+                  className={`flex-1 glass-card p-4 rounded-lg flex flex-col items-center gap-2 transition-all ${isActive ? 'ring-2 ring-primary shadow-md' : 'opacity-60'}`}
+                >
+                  <div className={`w-12 h-12 rounded-full ${colors.bg} ${colors.text} flex items-center justify-center font-bold text-lg shadow`}>
+                    {m.key}
+                  </div>
+                  <span className="text-xs font-semibold">{m.name}</span>
+                  {isActive && <span className="text-[10px] text-primary font-bold uppercase tracking-wider">Aktivní</span>}
+                </button>
+              )
+            })}
           </div>
         </section>
 

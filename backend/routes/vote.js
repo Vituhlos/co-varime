@@ -4,7 +4,7 @@ import { mkdirSync } from 'fs'
 import { join } from 'path'
 import { broadcast } from '../websocket.js'
 
-const DATA_DIR = process.env.DATA_DIR || '/app/data'
+const DATA_DIR = process.env.DATA_DIR || (process.platform === 'win32' ? './data' : '/app/data')
 mkdirSync(DATA_DIR, { recursive: true })
 const db = new Database(join(DATA_DIR, 'votes.db'))
 
@@ -50,9 +50,10 @@ router.post('/propose', (req, res) => {
   // Deactivate old proposals
   db.prepare('UPDATE proposals SET active = 0 WHERE active = 1').run()
 
+  const proposedBy = req.body.proposedBy || 'J'
   const result = db.prepare(
     'INSERT INTO proposals (title, url, image, proposed_by) VALUES (?, ?, ?, ?)'
-  ).run(recipe.title, recipe.url || null, recipe.image || null, 'J')
+  ).run(recipe.title, recipe.url || null, recipe.image || null, proposedBy)
 
   const proposal = db.prepare('SELECT * FROM proposals WHERE id = ?').get(result.lastInsertRowid)
   broadcast({ type: 'proposal_new', proposal })
